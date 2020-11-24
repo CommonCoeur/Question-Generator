@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+             background: #070707;
+            font-family: "Courier New", Courier, monospace;
+            padding: 25%;
+        }
+        #main{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #question{
+            font-size: 2em;
+            color: white;
+            margin-bottom: 50px;
+        }
+        #new-question{
+            padding: .5em;
+            background: linear-gradient(0deg,  #474A48, #0e0518) ;
+            color: #2CF6B3;
+            border-radius: 5px;
+            font-size: 1.25em;
+            margin: .5em;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div id="question"></div>
+        <button id="new-question">
+            New Question
+        </button>
+        <div id="question-status">
+
+        </div>
+    </div>
+</body>
+<script>
+    // Delete and add your questions into the brackets
+    let questions = [
+            "What was the first message sent over the internet?", 
+            "Hello, world!", 
+            "Rabble",
+            "Foo",
+            "Bar",
+            "Fizz",
+            "Bang"
+            ];
+    let answered = [];
+    let question = document.getElementById("question");
+    let questionStatus = document.getElementById("question-status");
+    questionStatus.innerText = questions.length
+    document.getElementById("new-question").addEventListener("click", (event) => {
+        let questionIndex = Math.floor(Math.random() * questions.length);
+        let currentQuestion = questions[questionIndex];
+        questions.splice(questionIndex, 1);
+        answered.push(currentQuestion);
+        question.innerText = currentQuestion;
+        questionStatus.innerText = questions.length
+        if (questions.length === 0) {
+            questions = [...answered];
+            answered = [];
+        }
+    })
+</script>
+</html>
